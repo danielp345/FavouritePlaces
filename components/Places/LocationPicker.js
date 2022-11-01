@@ -27,7 +27,10 @@ const LocationPicker = ({ onTakeLocation }) => {
 	}, [route, isFocused])
 
 	useEffect(() => {
-		onTakeLocation(pickedLocation)
+		if (pickedLocation) {
+			const address = "Poland"
+			onTakeLocation({ ...pickedLocation, address })
+		}
 	}, [pickedLocation, onTakeLocation])
 
 	const verifyPermissions = async () => {
@@ -87,7 +90,8 @@ const LocationPicker = ({ onTakeLocation }) => {
 					latitudeDelta: 0.001,
 					longitudeDelta: 0.001,
 				}}
-				style={{ width: "100%", height: 200 }}>
+				style={{ width: "100%", height: 200 }}
+			>
 				<Marker
 					title="Picked location"
 					coordinate={{
